@@ -13,10 +13,10 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_blankFragment"
-            app:destination="@id/spell_view" />
+            app:destination="@id/spellViewFragment" />
     </fragment>
     <fragment
-        android:id="@+id/spell_view"
+        android:id="@+id/spellViewFragment"
         android:name="com.example.myapplication.SpellViewFragment"
         android:label="spell viewer"
         tools:layout="@layout/spell_view">

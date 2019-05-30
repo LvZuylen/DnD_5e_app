@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_menu_camera"
         android:title="@string/menu_home" />
         <item
-            android:id="@+id/spell_view"
+            android:id="@+id/spellViewFragment"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_tools" />
         <!-- Deze zijn niet gekoppeld aan een nav id dus werken deze niet-->

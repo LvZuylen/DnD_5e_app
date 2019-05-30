@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController controller = NavHostFragment.findNavController(HomeFragment.this);
-                controller.navigate(R.id.spell_view);
+                controller.navigate(R.id.spellViewFragment);
             }
         });
     }
