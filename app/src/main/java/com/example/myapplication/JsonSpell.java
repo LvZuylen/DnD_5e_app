@@ -1,3 +1,5 @@
+package com.example.myapplication;
+
 import com.google.gson.annotations.SerializedName;
 
 public class JsonSpell {
@@ -11,7 +13,7 @@ public class JsonSpell {
     private String spellName;
 
     @SerializedName("desc")
-    private String spelldesc;
+    private String spellDesc;
 
     @SerializedName("higher_level")
     private String spellHigherLevel;
@@ -88,12 +90,12 @@ public class JsonSpell {
         this.spellName = spellName;
     }
 
-    public String getSpelldesc() {
-        return spelldesc;
+    public String getSpellDesc() {
+        return spellDesc;
     }
 
-    public void setSpelldesc(String spelldesc) {
-        this.spelldesc = spelldesc;
+    public void setSpellDesc(String spellDesc) {
+        this.spellDesc = spellDesc;
     }
 
     public String getSpellHigherLevel() {
