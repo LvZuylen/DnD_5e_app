@@ -12,7 +12,7 @@
         android:label="DND 5e Lucas app"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_blankFragment"
+            android:id="@+id/action_homeFragment_to_spellListFragment"
             app:destination="@+id/spellListFragment" />
     </fragment>
     <fragment

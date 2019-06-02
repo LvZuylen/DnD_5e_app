@@ -37,7 +37,6 @@ public class SpellViewFragment extends Fragment {
     private TextView textView;
     private RequestQueue queue;
     public String textString = "nothing";
-    // private boolean responseReceived;
     public JsonSpell jsonSpell;
 
     public SpellViewFragment() {
@@ -56,12 +55,11 @@ public class SpellViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.spell_view, container, false);
 
     }
 
-    private class DownloadSpellController extends AsyncTask<String, Void, JsonSpell> {
+    public class DownloadSpellController extends AsyncTask<String, Void, JsonSpell> {
         private boolean responseReceived = false;
 
         @Override
@@ -100,8 +98,6 @@ public class SpellViewFragment extends Fragment {
         protected void onPostExecute(JsonSpell spell) {
             // update UI elements
             textView.setText(jsonSpell.getSpellName());
-            queue.cancelAll("Rest Response");
-
         }
     }
 }

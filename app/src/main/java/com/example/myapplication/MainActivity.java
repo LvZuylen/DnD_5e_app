@@ -18,7 +18,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
+    public ArrayList<JsonSpell> spellBook;
+
     AppBarConfiguration appBarConfiguration;
     NavController navController;
 
@@ -61,5 +66,9 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return NavigationUI.onNavDestinationSelected(item, navController);
+    }
+
+    public void defaultSpells(){
+
     }
 }
