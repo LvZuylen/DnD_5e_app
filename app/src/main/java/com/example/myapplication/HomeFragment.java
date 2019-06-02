@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button button2 = getActivity().findViewById(R.id.button2);
+        Button button2 = getActivity().findViewById(R.id.spellBookButton);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,26 +7,12 @@
     tools:context=".SpellListFragment">
 
     <!-- A RecyclerView with some commonly used attributes -->
-    <LinearLayout
-        android:id="@+id/spellListFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="9dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".screens.HomeFragment">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/spell_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

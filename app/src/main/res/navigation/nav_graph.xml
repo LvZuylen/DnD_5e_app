@@ -28,7 +28,7 @@
         android:id="@+id/spellListFragment"
         android:name="com.example.myapplication.SpellListFragment"
         android:label="fragment_spell_list_view"
-        tools:layout="@layout/fragment_spell_list_view">
+        tools:layout="@layout/spell_list_view">
         <action
             android:id="@+id/action_spell_list_view_to_spellViewFragment"
             app:destination="@id/spellViewFragment" />

@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> {
@@ -26,7 +24,7 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View spellView = inflater.inflate(R.layout.fragment_spell_list_view, parent, false);
+        View spellView = inflater.inflate(R.layout.spell_list_view, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(spellView);

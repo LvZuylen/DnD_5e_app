@@ -3,11 +3,17 @@ package com.example.myapplication;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,17 +35,12 @@ public class SpellListFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue queue;
     // private OnFragmentInteractionListener mListener;
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        // Lookup the recyclerview in activity layout
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.spell_list_view);
         // Initialize spells
         queue = Volley.newRequestQueue(getActivity());
         String url = "http://www.dnd5eapi.co/api/spells/42/";
-        recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.spell_list_view);
-
         new SpellInitController().execute(url);
 
         // Create adapter passing in the sample user data
@@ -50,6 +51,17 @@ public class SpellListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         // That's all!
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.spell_list_view, container, false);
+
     }
 
     public class SpellInitController extends AsyncTask<String, Void, Void> {
@@ -116,7 +128,7 @@ public class SpellListFragment extends Fragment {
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
 //        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_spell_list_view, container, false);
+//        return inflater.inflate(R.layout.spell_list_view, container, false);
 //
 //
 //    }
