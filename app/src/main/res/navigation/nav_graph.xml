@@ -24,4 +24,9 @@
             android:id="@+id/action_blankFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/spell_list_view"
+        android:name="com.example.myapplication.spell_list_view"
+        android:label="fragment_spell_list_view"
+        tools:layout="@layout/fragment_spell_list_view" />
 </navigation>

@@ -2,6 +2,11 @@ package com.example.myapplication;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static java.lang.Integer.parseInt;
+
 public class JsonSpell {
     @SerializedName("_id")
     private String spellId;
@@ -62,7 +67,24 @@ public class JsonSpell {
     private String spellURL;
 
     // constructor
-    public JsonSpell() {
+    public JsonSpell(JSONObject jsonObject) {
+        try {
+            setSpellId(jsonObject.getString("_id"));
+            setSpellIndex(parseInt(jsonObject.getString("index")));
+            setSpellName(jsonObject.getString("name"));
+            setSpellDesc(jsonObject.getString("desc"));
+            setSpellHigherLevel(jsonObject.getString("higher_level"));
+            setSpellPage(jsonObject.getString("page"));
+            setSpellRange(jsonObject.getString("range"));
+            // nsetSpellComponents(jsonObject.getString("components"));
+            setSpellMaterial(jsonObject.getString("materials"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void parseJsonSpell(JSONObject jsonObject) {
 
     }
 
@@ -118,7 +140,7 @@ public class JsonSpell {
         return spellrange;
     }
 
-    public void setSpellrange(String spellrange) {
+    public void setSpellRange(String spellrange) {
         this.spellrange = spellrange;
     }
 

@@ -35,8 +35,11 @@ import java.util.Objects;
 public class SpellViewFragment extends Fragment {
 
     private TextView textView;
-    private JsonSpell jsonSpell;
     private RequestQueue queue;
+    public String textString = "nothing";
+    // private boolean responseReceived;
+    public JsonSpell jsonSpell;
+
 
     public SpellViewFragment() {
         // Required empty public constructor
@@ -45,13 +48,11 @@ public class SpellViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // itemadapter -> research
-
         textView = Objects.requireNonNull(getView()).findViewById(R.id.spell_text);
-        queue  = Volley.newRequestQueue(getActivity());
+        queue = Volley.newRequestQueue(getActivity());
+        textView.setText(textString);
         String url = "http://www.dnd5eapi.co/api/spells/42/";
-
         new DownloadSpellController().execute(url);
-
     }
 
     @Override
@@ -63,48 +64,47 @@ public class SpellViewFragment extends Fragment {
     }
 
     private class DownloadSpellController extends AsyncTask<String, Void, JsonSpell> {
+        private boolean responseReceived = false;
 
+        @Override
         protected JsonSpell doInBackground(String... url) {
-            final JsonSpell spell = new JsonSpell();
+
             JsonObjectRequest spellRequest = new JsonObjectRequest(Request.Method.GET, url[0],
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            try {
-                                spell.setSpellId(response.getString("_id"));
-                                spell.setSpellIndex(response.getInt("index"));
-                                spell.setSpellName(response.getString("name"));
-                                spell.setSpellDesc(response.getString("desc"));
-                                textView.setText(spell.getSpellDesc());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            Log.e("Rest Response", response.toString());
-                            // textView.setText("Response is: " + response.toString());
-                            // textView.setText("from JSON:\n" + jsonSpell.getSpellName());
+                            jsonSpell = new JsonSpell(response);
+                            responseReceived = true;
+                            Log.e("Rest Response", "response is: " + response.toString());
                         }
                     }, new Response.ErrorListener() {
-
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("Rest Response", error.toString());
                     textView.setText("That didn't work! Error message: \n" + error.toString());
+                    responseReceived = true;
                 }
             }
             );
             queue.add(spellRequest);
-            return spell;
+            textView.setText("loading..");
+            while (true) {
+                // wait until the json spell is ready, ugly but works
+                if (responseReceived) {
+                    break;
+                }
+            }
+            return jsonSpell;
         }
 
-        protected void onProgressUpdate() {
-        }
-
+        @Override
         protected void onPostExecute(JsonSpell spell) {
+            // update UI elements
+            textView.setText(jsonSpell.getSpellName());
             queue.cancelAll("Rest Response");
+
         }
     }
-
-
 }
 
