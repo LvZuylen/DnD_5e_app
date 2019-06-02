@@ -4,34 +4,38 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+import java.util.ArrayList;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link spell_list_view.OnFragmentInteractionListener} interface
+ * {@link SpellListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link spell_list_view#newInstance} factory method to
+ * Use the {@link SpellListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class spell_list_view extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SpellListFragment extends Fragment {
+    public ArrayList<JsonSpell> spellBook;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
     private OnFragmentInteractionListener mListener;
 
-    public spell_list_view() {
+    public SpellListFragment() {
         // Required empty public constructor
     }
 
@@ -41,14 +45,12 @@ public class spell_list_view extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment spell_list_view.
+     * @return A new instance of fragment SpellListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static spell_list_view newInstance(String param1, String param2) {
-        spell_list_view fragment = new spell_list_view();
+    public static SpellListFragment newInstance(String param1, String param2) {
+        SpellListFragment fragment = new SpellListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,10 +58,6 @@ public class spell_list_view extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -67,7 +65,28 @@ public class spell_list_view extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_spell_list_view, container, false);
+
+
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // itemadapter -> research
+        recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.spell_list_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new spellItemAdapter(spellBook);
+        recyclerView.setAdapter(mAdapter);
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

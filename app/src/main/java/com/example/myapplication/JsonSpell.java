@@ -70,14 +70,21 @@ public class JsonSpell {
     public JsonSpell(JSONObject jsonObject) {
         try {
             setSpellId(jsonObject.getString("_id"));
+            setSpellURL(jsonObject.getString("url"));
             setSpellIndex(parseInt(jsonObject.getString("index")));
             setSpellName(jsonObject.getString("name"));
             setSpellDesc(jsonObject.getString("desc"));
             setSpellHigherLevel(jsonObject.getString("higher_level"));
             setSpellPage(jsonObject.getString("page"));
             setSpellRange(jsonObject.getString("range"));
-            // nsetSpellComponents(jsonObject.getString("components"));
+            //TODO: add setSpellComponents(jsonObject.getString("components"));
             setSpellMaterial(jsonObject.getString("materials"));
+            setSpellRitual(jsonObject.getString("ritual"));
+            setSpellDuration(jsonObject.getString("duration"));
+            setSpellConcentration(jsonObject.getString("concentration"));
+            setSpellCastingTime(jsonObject.getString("casting_time"));
+            setSpellLevel(parseInt(jsonObject.getString("level")));
+            //TODO: add school and classes
 
         } catch (JSONException e) {
             e.printStackTrace();

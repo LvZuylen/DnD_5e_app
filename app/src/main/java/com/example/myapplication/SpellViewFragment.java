@@ -40,14 +40,12 @@ public class SpellViewFragment extends Fragment {
     // private boolean responseReceived;
     public JsonSpell jsonSpell;
 
-
     public SpellViewFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // itemadapter -> research
         textView = Objects.requireNonNull(getView()).findViewById(R.id.spell_text);
         queue = Volley.newRequestQueue(getActivity());
         textView.setText(textString);
