@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="Spell Name"
@@ -26,9 +26,9 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/spellLevel"
+        android:id="@+id/spellMaterials"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_below="@+id/spellTitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

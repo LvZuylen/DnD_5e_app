@@ -74,12 +74,12 @@ public class JsonSpell {
             setSpellIndex(parseInt(jsonObject.getString("index")));
             setSpellName(jsonObject.getString("name"));
             setSpellDesc(jsonObject.getString("desc"));
-            setSpellHigherLevel(jsonObject.getString("higher_level"));
+            // setSpellHigherLevel(jsonObject.getString("higher_level"));
             setSpellPage(jsonObject.getString("page"));
             setSpellRange(jsonObject.getString("range"));
             //TODO: add setSpellComponents(jsonObject.getString("components"));
-            setSpellMaterial(jsonObject.getString("materials"));
-            setSpellRitual(jsonObject.getString("ritual"));
+            // setSpellMaterial(jsonObject.getString("material"));
+            // setSpellRitual(jsonObject.getString("ritual"));
             setSpellDuration(jsonObject.getString("duration"));
             setSpellConcentration(jsonObject.getString("concentration"));
             setSpellCastingTime(jsonObject.getString("casting_time"));
@@ -89,10 +89,6 @@ public class JsonSpell {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public void parseJsonSpell(JSONObject jsonObject) {
-
     }
 
     public String getSpellId() {

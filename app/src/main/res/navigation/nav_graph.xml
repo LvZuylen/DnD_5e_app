@@ -23,14 +23,23 @@
         <action
             android:id="@+id/action_blankFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="spell"
+            app:argType="string"
+            android:defaultValue="spell_string" />
     </fragment>
     <fragment
         android:id="@+id/spellListFragment"
         android:name="com.example.myapplication.SpellListFragment"
         android:label="fragment_spell_list_view"
         tools:layout="@layout/spell_list_view">
-        <action
-            android:id="@+id/action_spell_list_view_to_spellViewFragment"
-            app:destination="@id/spellViewFragment" />
+        <action android:id="@+id/action_spell_list_view_to_spellViewFragment"
+            app:destination="@+id/spellViewFragment">
+            <argument
+                android:name="spell_description_text"
+                app:argType="string"
+                android:defaultValue="spell description" />
+        </action>
     </fragment>
+
 </navigation>

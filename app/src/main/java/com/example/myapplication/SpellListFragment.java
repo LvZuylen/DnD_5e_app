@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import java.util.Objects;
 import java.util.ArrayList;
 
 
-public class SpellListFragment extends Fragment {
+public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnItemClickHandler{
     public ArrayList<JsonSpell> spellBook;
     private SpellAdapter adapter;
     private RecyclerView recyclerView;
@@ -44,7 +46,7 @@ public class SpellListFragment extends Fragment {
 
 
         // Create adapter passing in the sample user data
-        adapter = new SpellAdapter(spellBook);
+        adapter = new SpellAdapter(spellBook, this);
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
@@ -138,6 +140,12 @@ public class SpellListFragment extends Fragment {
             queue.add(spellRequest);
         }
         return 1;
+    }
+
+    @Override
+    public void onSpellClick(JsonSpell spell) {
+        NavController controller = NavHostFragment.findNavController(SpellListFragment.this);
+        controller.navigate(R.id.spellViewFragment);
     }
 }
 
