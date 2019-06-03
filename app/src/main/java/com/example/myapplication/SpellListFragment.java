@@ -37,6 +37,7 @@ public class SpellListFragment extends Fragment {
     // private OnFragmentInteractionListener mListener;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        spellBook = new ArrayList<>();
         recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.spell_list_view);
         // Initialize spells
         queue = Volley.newRequestQueue(getActivity());
@@ -76,8 +77,7 @@ public class SpellListFragment extends Fragment {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                if (spellBook.add(new JsonSpell(response))) {
-                                }
+                                spellBook.add(new JsonSpell(response));
                                 responseReceived = true;
                                 Log.e("Rest Response", "response is: " + response.toString());
                             }
