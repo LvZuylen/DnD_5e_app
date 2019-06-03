@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -10,36 +9,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> {
-
+public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.MyViewHolder> {
     private ArrayList<JsonSpell> sb;
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView spellTitleTV;
+        public TextView spellLevelTV;
+        public MyViewHolder(TextView spellPreview) {
+            //wtf am i even doing here?
+            super(spellPreview);
+            spellTitleTV = spellPreview.findViewById(R.id.spellTitle);
+        }
+    }
 
     public SpellAdapter(ArrayList<JsonSpell> spells) {
         sb = spells;
     }
 
     @Override
-    public SpellAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SpellAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View spellView = inflater.inflate(R.layout.spell_list_view, parent, false);
-
+        TextView v = (TextView) inflater.inflate(R.layout.spell_preview, parent, false);
+        // final TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(spellView);
+        MyViewHolder viewHolder = new MyViewHolder(v);
         return viewHolder;
     }
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(SpellAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(MyViewHolder viewHolder, int position) {
         // Get the data model based on position
         JsonSpell spell = sb.get(position);
-
         // Set item views based on your views and data model
-        TextView textView = viewHolder.titleTextView;
-        textView.setText(spell.getSpellName());
+        // TextView spellTitleTV = viewHolder.titleTextView;
+        viewHolder.spellTitleTV.setText(spell.getSpellName());
+
     }
 
     // Returns the total count of items in the list
@@ -48,23 +60,6 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         return sb.size();
     }
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
-        public TextView titleTextView;
-        public TextView levelTextView;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
 
-            titleTextView = itemView.findViewById(R.id.spellTitle);
-            levelTextView = itemView.findViewById(R.id.spellLevel);
-        }
-    }
 }

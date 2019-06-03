@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ArrayList;
 
@@ -51,10 +52,56 @@ public class SpellListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         // That's all!
 
-
         queue = Volley.newRequestQueue(getActivity());
-        String url = "http://www.dnd5eapi.co/api/spells/42/";
-        addToSpellBook(url);
+        String[] urls = new String[]{
+                "http://www.dnd5eapi.co/api/spells/42/",
+                "http://www.dnd5eapi.co/api/spells/43/",
+                "http://www.dnd5eapi.co/api/spells/44/",
+                "http://www.dnd5eapi.co/api/spells/45/",
+                "http://www.dnd5eapi.co/api/spells/46/",
+                "http://www.dnd5eapi.co/api/spells/47/",
+                "http://www.dnd5eapi.co/api/spells/48/",
+                "http://www.dnd5eapi.co/api/spells/484/",
+                "http://www.dnd5eapi.co/api/spells/434/",
+                "http://www.dnd5eapi.co/api/spells/435/",
+                "http://www.dnd5eapi.co/api/spells/437/",
+                "http://www.dnd5eapi.co/api/spells/439/",
+                "http://www.dnd5eapi.co/api/spells/345/",
+                "http://www.dnd5eapi.co/api/spells/223/",
+                "http://www.dnd5eapi.co/api/spells/123/",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+                "http://www.dnd5eapi.co/api/spells/119",
+        };
+        addToSpellBook(urls);
     }
 
     @Override
@@ -69,7 +116,7 @@ public class SpellListFragment extends Fragment {
 
     }
 
-    public int addToSpellBook(String... urls) {
+    public int addToSpellBook(String[] urls) {
         int count = urls.length;
         for (int i = 0; i < count; i++) {
             JsonObjectRequest spellRequest = new JsonObjectRequest(Request.Method.GET, urls[i],

@@ -19,7 +19,7 @@
         android:id="@+id/spellViewFragment"
         android:name="com.example.myapplication.SpellViewFragment"
         android:label="spell viewer"
-        tools:layout="@layout/spell_view">
+        tools:layout="@layout/spell_preview">
         <action
             android:id="@+id/action_blankFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
