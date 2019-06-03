@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -58,12 +59,15 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
-            JsonSpell spell = sb.get(pos);
-            spellOnItemClickHandler.onSpellClick(spell);
+            // JsonSpell spell = sb.get(pos);
+            // spellOnItemClickHandler.onSpellClick(spell);
+
+            String description = sb.get(pos).getSpellDesc();
+            spellOnItemClickHandler.onSpellClick(description);
         }
     }
 
     public interface SpellOnItemClickHandler {
-        void onSpellClick(JsonSpell item);
+        void onSpellClick(String spellDesc);
     }
 }

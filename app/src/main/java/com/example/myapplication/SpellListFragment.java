@@ -143,7 +143,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
     }
 
     @Override
-    public void onSpellClick(JsonSpell spell) {
+    public void onSpellClick(String spellDesc) {
         NavController controller = NavHostFragment.findNavController(SpellListFragment.this);
         controller.navigate(R.id.spellViewFragment);
     }

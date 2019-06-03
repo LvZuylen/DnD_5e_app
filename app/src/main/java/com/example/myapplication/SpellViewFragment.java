@@ -31,9 +31,7 @@ import java.util.Objects;
 public class SpellViewFragment extends Fragment {
 
     private TextView textView;
-    private RequestQueue queue;
-    public String textString = "nothing";
-    public JsonSpell jsonSpell;
+    private String textString = "nothing";
 
     public SpellViewFragment() {
         // Required empty public constructor
@@ -42,10 +40,8 @@ public class SpellViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         textView = Objects.requireNonNull(getView()).findViewById(R.id.spell_text);
-        queue = Volley.newRequestQueue(getActivity());
+        textString = SpellViewFragmentArgs.fromBundle(getArguments()).getSpell();
         textView.setText(textString);
-        String url = "http://www.dnd5eapi.co/api/spells/42/";
-        new DownloadSpellController().execute(url);
     }
 
     @Override
@@ -55,46 +51,8 @@ public class SpellViewFragment extends Fragment {
 
     }
 
-    public class DownloadSpellController extends AsyncTask<String, Void, JsonSpell> {
-        private boolean responseReceived = false;
 
-        @Override
-        protected JsonSpell doInBackground(String... url) {
 
-            JsonObjectRequest spellRequest = new JsonObjectRequest(Request.Method.GET, url[0],
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            jsonSpell = new JsonSpell(response);
-                            responseReceived = true;
-                            Log.e("Rest Response", "response is: " + response.toString());
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("Rest Response", error.toString());
-                    textView.setText("That didn't work! Error message: \n" + error.toString());
-                    responseReceived = true;
-                }
-            }
-            );
-            queue.add(spellRequest);
-            textView.setText("loading..");
-            while (true) {
-                // wait until the json spell is ready, ugly but works
-                if (responseReceived) {
-                    break;
-                }
-            }
-            return jsonSpell;
-        }
 
-        @Override
-        protected void onPostExecute(JsonSpell spell) {
-            // update UI elements
-            textView.setText(jsonSpell.getSpellName());
-        }
-    }
 }
 
