@@ -15,8 +15,11 @@
     <string name="menu_send">Send</string>
 
     <string name="spells_button">spells</string>
+    <string name="add_spells_button">Add spell to spellbook</string>
     <string name="loading">loading...</string>
     <string name="navy_seal">what the **** did you just ****ing say to me you little ****</string>
+
+    <string name="pref_key">5e spellbook preferences key Lucas</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

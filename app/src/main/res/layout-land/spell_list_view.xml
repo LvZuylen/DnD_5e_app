@@ -11,7 +11,7 @@
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="2dp"
         android:text="@string/add_spells_button"
@@ -22,8 +22,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/spell_list_view"
-        android:layout_width="406dp"
-        android:layout_height="650dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="2dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
