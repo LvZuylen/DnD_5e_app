@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<JsonSpell> spellBook;
 
     AppBarConfiguration appBarConfiguration;
     NavController navController;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setDrawerLayout(drawer).build();
         NavigationView navigationView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -68,7 +66,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.onNavDestinationSelected(item, navController);
     }
 
-    public void defaultSpells(){
-
-    }
 }

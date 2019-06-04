@@ -1,6 +1,4 @@
 package com.example.myapplication;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,13 +28,13 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ArrayList;
 
-
 public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnItemClickHandler {
     public ArrayList<JsonSpell> spellBook;
     private SpellAdapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue queue;
+    private String[] urls;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -53,9 +51,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         // That's all!
-
-        queue = Volley.newRequestQueue(getActivity());
-        String[] urls = new String[]{
+        urls = new String[]{
                 "http://www.dnd5eapi.co/api/spells/42/",
                 "http://www.dnd5eapi.co/api/spells/43/",
                 "http://www.dnd5eapi.co/api/spells/44/",
@@ -73,7 +69,9 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
                 "http://www.dnd5eapi.co/api/spells/123/",
                 "http://www.dnd5eapi.co/api/spells/119",
         };
+        queue = Volley.newRequestQueue(getActivity());
         addToSpellBook(urls);
+        addMoreSpells("http://www.dnd5eapi.co/api/spells/1");
     }
 
     @Override
@@ -97,7 +95,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
                         @Override
                         public void onResponse(JSONObject response) {
                             spellBook.add(new JsonSpell(response));
-                            adapter.notifyDataSetChanged();
+                            adapter.notifyItemInserted(spellBook.size());
                             Log.e("Rest Response", "response is: " + response.toString());
                         }
                     }, new Response.ErrorListener() {
@@ -110,6 +108,12 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
             queue.add(spellRequest);
         }
         return 1;
+    }
+
+    // adds one or more spells
+    public void addMoreSpells(String newSpell) {
+        String[] spells = new String[]{newSpell};
+        addToSpellBook(spells);
     }
 
     @Override
