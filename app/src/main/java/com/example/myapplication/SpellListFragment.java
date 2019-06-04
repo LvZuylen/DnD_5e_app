@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,13 +45,14 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
     private RequestQueue queue;
     // private String[] urls;
     private ArrayList<String> urls;
+    private EditText textInput;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         spellBook = new ArrayList<>();
         recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.spell_list_view);
-
+        textInput = view.findViewById(R.id.spell_input);
         // Initialize spells
         adapter = new SpellAdapter(spellBook, this);
         recyclerView.setAdapter(adapter);
@@ -67,7 +69,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
         addSpell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addMoreSpells("http://www.dnd5eapi.co/api/spells/1");
+                addMoreSpells(textInput.getText().toString());
             }
         });
     }
