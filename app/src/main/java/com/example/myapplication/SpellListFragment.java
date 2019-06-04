@@ -30,6 +30,8 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
@@ -40,7 +42,8 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue queue;
-    private String[] urls;
+    // private String[] urls;
+    private ArrayList<String> urls;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        if(!getListFromPreferences()){
+        if (!getListFromPreferences()) {
             defaultSpellBook();
         }
 
@@ -81,10 +84,10 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
 
     }
 
-    public int addToSpellBook(String[] urls) {
-        int count = urls.length;
+    public int addToSpellBook(ArrayList<String> urls) {
+        int count = urls.size();
         for (int i = 0; i < count; i++) {
-            JsonObjectRequest spellRequest = new JsonObjectRequest(Request.Method.GET, urls[i],
+            JsonObjectRequest spellRequest = new JsonObjectRequest(Request.Method.GET, urls.get(i),
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -107,13 +110,15 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
 
     // adds one or more spells
     public void addMoreSpells(String newSpell) {
-        String[] spells = new String[]{newSpell};
-        addToSpellBook(spells);
+        ArrayList newURL = new ArrayList(0);
+        newURL.add(newSpell);
+        addToSpellBook(newURL);
+        urls.add(newSpell);
         saveListInPreferences();
     }
 
     public void defaultSpellBook() {
-        urls = new String[]{
+        urls = new ArrayList<>(Arrays.asList(
                 "http://www.dnd5eapi.co/api/spells/42/",
                 "http://www.dnd5eapi.co/api/spells/43/",
                 "http://www.dnd5eapi.co/api/spells/44/",
@@ -129,10 +134,8 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
                 "http://www.dnd5eapi.co/api/spells/345/",
                 "http://www.dnd5eapi.co/api/spells/223/",
                 "http://www.dnd5eapi.co/api/spells/123/",
-                "http://www.dnd5eapi.co/api/spells/119",
-        };
+                "http://www.dnd5eapi.co/api/spells/119"));
     }
-
 
     public void saveListInPreferences() {
         String json = new Gson().toJson(urls);
@@ -155,7 +158,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
         if (prefs.contains(getString(R.string.pref_key))) {
             String prefsString = prefs.getString(getString(R.string.pref_key), "");
 
-            urls = new Gson().fromJson(prefsString, String[].class);
+            urls = new Gson().fromJson(prefsString, ArrayList.class);
             return true;
         }
         return false;
