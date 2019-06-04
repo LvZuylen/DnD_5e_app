@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.ArrayList;
 
 
-public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnItemClickHandler{
+public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnItemClickHandler {
     public ArrayList<JsonSpell> spellBook;
     private SpellAdapter adapter;
     private RecyclerView recyclerView;
@@ -71,36 +71,6 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
                 "http://www.dnd5eapi.co/api/spells/345/",
                 "http://www.dnd5eapi.co/api/spells/223/",
                 "http://www.dnd5eapi.co/api/spells/123/",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
-                "http://www.dnd5eapi.co/api/spells/119",
                 "http://www.dnd5eapi.co/api/spells/119",
         };
         addToSpellBook(urls);
@@ -144,8 +114,16 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
 
     @Override
     public void onSpellClick(String spellDesc) {
-        NavController controller = NavHostFragment.findNavController(SpellListFragment.this);
-        controller.navigate(R.id.spellViewFragment);
+        // NavController controller = NavHostFragment.findNavController(SpellListFragment.this);
+        // controller.navigate(R.id.spellViewFragment);
+        SpellListFragmentDirections.ActionSpellListViewToSpellViewFragment action;
+
+        action = SpellListFragmentDirections.actionSpellListViewToSpellViewFragment();
+        // should be:
+        // action = SpellListFragmentDirections.actionSpellListViewToSpellViewFragment(spellDesc);
+        // but it won't take arguments?..
+
+        NavHostFragment.findNavController(SpellListFragment.this).navigate(action);
     }
 }
 

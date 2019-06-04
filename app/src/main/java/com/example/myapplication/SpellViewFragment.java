@@ -41,7 +41,7 @@ public class SpellViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         textView = Objects.requireNonNull(getView()).findViewById(R.id.spell_text);
         textString = SpellViewFragmentArgs.fromBundle(getArguments()).getSpell();
-        textView.setText(textString);
+        // textView.setText(textString);
     }
 
     @Override

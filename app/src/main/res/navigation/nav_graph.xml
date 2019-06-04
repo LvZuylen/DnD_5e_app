@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- alleen via GUI veranderd -->
+<?xml version="1.0" encoding="utf-8"?><!-- alleen via GUI veranderd -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,15 +17,12 @@
     <fragment
         android:id="@+id/spellViewFragment"
         android:name="com.example.myapplication.SpellViewFragment"
-        android:label="spell viewer"
+        android:label="spell_viewer"
         tools:layout="@layout/spell_preview">
-        <action
-            android:id="@+id/action_blankFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
         <argument
-            android:name="spell"
+            android:name="spelltext"
             app:argType="string"
-            android:defaultValue="spell_string" />
+            android:defaultValue="spell text" />
     </fragment>
     <fragment
         android:id="@+id/spellListFragment"
@@ -37,9 +33,9 @@
             android:id="@+id/action_spell_list_view_to_spellViewFragment"
             app:destination="@+id/spellViewFragment">
             <argument
-                android:name="spell_description_text"
+                android:name="spellDesc"
                 app:argType="string"
-                android:defaultValue="spell description" />
+                android:defaultValue="default" />
         </action>
     </fragment>
 
