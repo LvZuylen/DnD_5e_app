@@ -31,7 +31,8 @@
         tools:layout="@layout/spell_list_view">
         <action
             android:id="@+id/action_spell_list_view_to_spellViewFragment"
-            app:destination="@+id/spellViewFragment">
+            app:destination="@id/spellViewFragment"
+            app:enterAnim="@anim/nav_default_enter_anim">
             <argument
                 android:name="spellDesc"
                 app:argType="string"

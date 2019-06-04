@@ -119,7 +119,7 @@ public class SpellListFragment extends Fragment implements SpellAdapter.SpellOnI
         SpellListFragmentDirections.ActionSpellListViewToSpellViewFragment action;
 
         action = SpellListFragmentDirections.actionSpellListViewToSpellViewFragment();
-        // should be:
+        action.setSpelltext(spellDesc);        // should be:
         // action = SpellListFragmentDirections.actionSpellListViewToSpellViewFragment(spellDesc);
         // but it won't take arguments?..
 
